@@ -1,0 +1,49 @@
+server:
+  port: 8060
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+              
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+        - Path=/user/**
+        filters:
+        - RewritePath=/user/(?<path>.*), /$\{path}
+      - id: fi-service
+        uri: lb://fi-service
+        predicates:
+        - Path=/fi-service/**
+        filters:
+        - RewritePath=/fi-service/(?<path>.*), /$\{path}
+      - id: figw-service
+        uri: lb://figw-service
+        predicates:
+        - Path=/figw-service/**
+        filters:
+        - RewritePath=/figw-service/(?<path>.*), /$\{path}
+      - id: department-service
+        uri: lb://department-service
+        predicates:
+        - Path=/department/**
+        filters:
+        - RewritePath=/department/(?<path>.*), /$\{path}
+      - id: auth-service
+        uri: lb://auth-service
+        predicates:
+        - Path=/auth/**
+        filters:
+        - RewritePath=/auth/(?<path>.*), /$\{path}
