@@ -3,7 +3,7 @@ package com.abc.fi.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Transaction {
+public class 	Transaction {
 
 	private TransactionType type;
 	private Date transactionDate;

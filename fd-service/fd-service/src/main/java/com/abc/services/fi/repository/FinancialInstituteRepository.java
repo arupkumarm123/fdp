@@ -25,6 +25,22 @@ public class FinancialInstituteRepository {
 			return null;
 	}
 	
+	public FinancialInstitute update(Long fiID , FinancialInstitute fi) {
+		
+		FinancialInstitute savedFI = findById(fiID);
+		if (savedFI == null) {	
+			throw new RuntimeException("FI Not found");
+		}
+		
+		merge(savedFI , fi);
+		
+		return fi;
+	}
+	
+	private void merge(FinancialInstitute savedFI , FinancialInstitute updatedFI) {
+		
+	}
+	
 	public List<FinancialInstitute> findAll() {
 		return fis;
 	}

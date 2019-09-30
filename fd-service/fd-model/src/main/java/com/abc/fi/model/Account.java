@@ -1,6 +1,8 @@
 package com.abc.fi.model;
 
 public class Account {
+	
+	private Long id;
 
 	private Long customerID;
 	private String bankID;
@@ -66,6 +68,10 @@ public class Account {
 
 	public void setAccountKey(String accountKey) {
 		this.accountKey = accountKey;
+	}
+	
+	public Long getID() {
+		return this.id;
 	}
 
 }

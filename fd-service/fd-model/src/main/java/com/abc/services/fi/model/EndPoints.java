@@ -5,7 +5,7 @@ import java.util.List;
 public class EndPoints {
 	
 
-	private int id;
+	private long id;
 	
 	private String name ;
 	
@@ -20,7 +20,7 @@ public class EndPoints {
 		
 	}
 	
-	public EndPoints(int id, String name, String desc, int fiID, List<EndPoint> endpoints) {
+	public EndPoints(long id, String name, String desc, int fiID, List<EndPoint> endpoints) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -29,11 +29,11 @@ public class EndPoints {
 		this.endpoints = endpoints;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

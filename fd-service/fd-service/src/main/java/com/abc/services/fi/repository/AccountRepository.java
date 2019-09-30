@@ -27,4 +27,17 @@ public class AccountRepository {
 	public List<Account> customerAccounts(long customerID) {
 		return customerAccount.get(customerID);
 	}
+	
+	public boolean delete(long customerID , long accountID) {
+		
+		List<Account> accounts = customerAccounts(customerID);
+		boolean success = accounts.removeIf(account -> account.getID() == accountID);
+		
+		if(success) {
+			
+			// apply transaction cleaning and message for serving layer
+		}
+		
+		return success;
+	}
 }

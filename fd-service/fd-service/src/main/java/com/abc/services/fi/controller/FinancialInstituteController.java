@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,12 @@ public class FinancialInstituteController {
 	public FinancialInstitute add(@RequestBody FinancialInstitute fi) {
 		LOGGER.info("Fi add: {}", fi);
 		return fiRepositroy.add(fi);
+	}
+	
+	@PatchMapping("/fi/{id}")
+	public FinancialInstitute update(@PathVariable("id") Long fiID , @RequestBody FinancialInstitute fi) {
+		LOGGER.info("FI updated {}" , fi);
+		return fiRepositroy.update(fiID , fi);
 	}
 	
 	@GetMapping("/fi") 
