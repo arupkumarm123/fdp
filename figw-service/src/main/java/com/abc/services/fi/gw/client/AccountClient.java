@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.abc.fi.model.Account;
+import com.abc.fi.model.Transaction;
 
 @FeignClient(name = "fi-service")
 public interface AccountClient {
@@ -18,5 +19,8 @@ public interface AccountClient {
 	
 	@PostMapping("/account/{cust_id}")
 	public Account add(@PathVariable("cust_id") Long custID, @RequestBody Account account);
+	
+	@PostMapping("/transaction/{cust_id}")
+	public Transaction addTransaction(@PathVariable("cust_id") Long custID, @RequestBody Transaction transaction);
 	
 }

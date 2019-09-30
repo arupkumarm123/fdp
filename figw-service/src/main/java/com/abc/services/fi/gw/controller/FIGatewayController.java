@@ -50,6 +50,10 @@ public class FIGatewayController {
 		EndPoint linkEndPoint;
 
 		EndPoints endPoints = fiClient.getEndPoints(fiID);
+		
+		if (endPoints.getEndpoints().isEmpty()) {
+			throw new RuntimeException("No endpoint defined");
+		}
 
 		Optional<EndPoint> acLinkEndpoint = endPoints.getEndpoints().stream()
 				.filter(ep -> ep.getEndPointType() == EndPointType.LINK).findFirst();
@@ -57,7 +61,7 @@ public class FIGatewayController {
 		if (acLinkEndpoint.isPresent()) {
 			linkEndPoint = acLinkEndpoint.get();
 		} else {
-			return null;
+			throw new RuntimeException("No link endpoint defined");
 		}
 		String url = linkEndPoint.getServiceDef().getUrl();
 		List<MetaDef> serviceMeta = metadataClient.get(fiID);
@@ -119,6 +123,9 @@ public class FIGatewayController {
 		EndPoint transactionEndpoint;
 
 		EndPoints endPoints = fiClient.getEndPoints(fiID);
+		if (endPoints.getEndpoints().isEmpty()) {
+			throw new RuntimeException("No endpoint defined");
+		}
 
 		Optional<EndPoint> tranEndpoint = endPoints.getEndpoints().stream()
 				.filter(ep -> ep.getEndPointType() == EndPointType.TRANSACTION).findFirst();
@@ -172,6 +179,9 @@ public class FIGatewayController {
 					changedTransaction.add(changedKey, tranAttr);
 					
 				});
+				Gson gson = new Gson();
+				Transaction transaction =  gson.fromJson(changedTransaction, Transaction.class);
+				accountClient.addTransaction(custID, transaction);
 				
 				changedTransactions.add(changedTransaction);
 				
